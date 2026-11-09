@@ -22,9 +22,7 @@ class StudentController extends Controller
 
     public function store(Request $request)
     {
-        $student = Student::create(
-            $request->validate($this->rules())
-        );
+        $student = Student::create($request->validate($this->rules()));
 
         return redirect()
             ->route('students.index')
@@ -33,23 +31,17 @@ class StudentController extends Controller
 
     public function show(Student $student)
     {
-        return view('student.detail', [
-            'student' => $student,
-        ]);
+        return view('student.detail', ['student' => $student]);
     }
 
     public function edit(Student $student)
     {
-        return view('student.edit', [
-            'student' => $student,
-        ]);
+        return view('student.edit', ['student' => $student]);
     }
 
     public function update(Request $request, Student $student)
     {
-        $student->update(
-            $request->validate($this->rules($student))
-        );
+        $student->update($request->validate($this->rules($student)));
 
         return redirect()
             ->route('students.show', $student)
